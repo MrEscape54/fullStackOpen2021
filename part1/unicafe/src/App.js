@@ -6,12 +6,14 @@ const Statistics = ({ feedback }) => {
   if (feedback.total) {
     return (
       <table>
-        <Statistic value={feedback.good} text="Good" />
-        <Statistic value={feedback.neutral} text="Neutral" />
-        <Statistic value={feedback.bad} text="Bad" />
-        <Statistic value={feedback.total} text="Total" />
-        <Statistic value={(feedback.good - feedback.bad) / feedback.total} text="Average" />
-        <Statistic value={feedback.good / feedback.total * 100} text="Positive" />
+        <tbody>
+          <Statistic value={feedback.good} text="Good" />
+          <Statistic value={feedback.neutral} text="Neutral" />
+          <Statistic value={feedback.bad} text="Bad" />
+          <Statistic value={feedback.total} text="Total" />
+          <Statistic value={(feedback.good - feedback.bad) / feedback.total} text="Average" />
+          <Statistic value={(feedback.good / feedback.total) * 100} text="Positive" />
+        </tbody>
       </table>
     );
   }
