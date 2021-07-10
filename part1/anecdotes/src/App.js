@@ -5,7 +5,7 @@ const Anecdote = ({ anecdote }) => <p>{anecdote}</p>;
 const Votes = ({ votes }) => <p>Has {votes} votes</p>;
 const BestAnecdote = ({ anecdote }) => <p>Anecdote with more votes: {anecdote}</p>;
 
-function App() {
+const App = () => {
   const anecdotes = [
     "If it hurts, do it more often",
     "Adding manpower to a late software project makes it later!",
@@ -20,7 +20,10 @@ function App() {
   const [selected, setSelected] = useState(0);
 
   const handleAnecdote = () => {
-    const randomAnecdote = Math.floor(Math.random() * anecdotes.length);
+    let randomAnecdote = Math.floor(Math.random() * anecdotes.length);
+    while (randomAnecdote === selected) {
+      randomAnecdote = Math.floor(Math.random() * anecdotes.length);
+    }
     setSelected(randomAnecdote);
   };
 
@@ -38,6 +41,6 @@ function App() {
       <Button handleClick={handleAnecdote} text="Next Anecdote" />
     </div>
   );
-}
+};
 
 export default App;
