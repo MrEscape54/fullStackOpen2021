@@ -1,16 +1,22 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function Detail({ name, capital, population, languages, flag }) {
   const [weather, setWeather] = useState([]);
+  const hasFetchedData = useRef(false);
 
   const accessKey = process.env.REACT_APP_WEATHER_KEY;
 
   useEffect(() => {
-    if (capital) {
-      axios.get(`http://api.weatherstack.com/current?access_key=${accessKey}&query=${capital}`).then(response => {
-        if (response.status === 200) setWeather(response.data.current);
-      });
+    if (!hasFetchedData.current) {
+      axios
+        .get("http://api.weatherstack.com/current", {
+          params: {
+            access_key: accessKey,
+            query: capital,
+          },
+        })
+        .then(response => setWeather(response.data.current));
     }
   }, [accessKey, capital]);
 
