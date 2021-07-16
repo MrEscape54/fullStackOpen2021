@@ -4,15 +4,15 @@ import { useState, useEffect } from "react";
 function Detail({ name, capital, population, languages, flag }) {
   const [weather, setWeather] = useState([]);
 
+  const accessKey = process.env.REACT_APP_WEATHER_KEY;
+
   useEffect(() => {
     if (capital) {
-      axios
-        .get(`http://api.weatherstack.com/current?access_key=e26bcb551deeb70ca310d892f8cdbb29&query=${capital}`)
-        .then(response => {
-          if (response.status === 200) setWeather(response.data.current);
-        });
+      axios.get(`http://api.weatherstack.com/current?access_key=${accessKey}&query=${capital}`).then(response => {
+        if (response.status === 200) setWeather(response.data.current);
+      });
     }
-  }, [capital]);
+  }, [accessKey, capital]);
 
   return (
     <div>
