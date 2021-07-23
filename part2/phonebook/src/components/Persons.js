@@ -1,12 +1,13 @@
-function Persons({ filterContacts }) {
+function Persons({ filterContacts, handleDeletePerson }) {
   return (
-    <ul>
+    <div>
       {filterContacts.map((person, i) => (
-        <li key={i}>
+        <div key={i}>
           {person.name} {person.number}
-        </li>
+          <button onClick={() => handleDeletePerson(person.id)}>delete</button>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }
 
